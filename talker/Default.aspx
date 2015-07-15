@@ -2,10 +2,10 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h1><%: Title %>.</h1>
-        <h2>Talker lets you ask any one any thing</h2>
+        <h2>Ask anyone about anything</h2>
         <p class="lead">The next leap in connecting the worlds hearts and minds.</p>
     <p class="lead">
-        <asp:Button ID="Bid_Click" runat="server" OnClick="CreateBid_Click" Text="Bid My Time" />
+        <asp:Button ID="Bid_Click" runat="server" OnClick="CreateBid_Click" Text="Sell My Time" />
     </p>
     
 </asp:Content>
