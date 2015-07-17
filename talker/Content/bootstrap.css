@@ -34,6 +34,7 @@ nav,
 section,
 summary {
   display: block;
+    text-align: center;
 }
 audio,
 canvas,
@@ -122,8 +123,7 @@ optgroup,
 select,
 textarea {
   color: inherit;
-  font: inherit;
-  margin: 0;
+  margin: 0 0 0 52px;
 }
 button {
   overflow: visible;

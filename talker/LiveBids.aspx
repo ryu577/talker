@@ -8,7 +8,7 @@
             </hgroup>
 
             <asp:ListView ID="bidList" runat="server" 
-                DataKeyNames="BidID" GroupItemCount="4"
+                DataKeyNames="BidID" GroupItemCount="8"
                 ItemType="talker.Models.LiveBid" SelectMethod="GetCategoryBids">
                 <EmptyDataTemplate>
                     <table >
