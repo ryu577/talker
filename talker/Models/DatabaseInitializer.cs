@@ -141,7 +141,27 @@ namespace talker.Models
                     CategoryID = 4,
                     CategoryName = "Legal",
                     Description = "Legal"
+                },
+                new Category
+                {
+                    CategoryID = 5,
+                    CategoryName = "Biology",
+                    Description = "Biology"
+                },
+                new Category
+                {
+                    CategoryID = 6,
+                    CategoryName = "Music",
+                    Description = "Music"
+                },
+                new Category
+                {
+                    CategoryID = 7,
+                    CategoryName = "Painting",
+                    Description = "Painting"
                 }
+
+
             };
 
             return Categories;
