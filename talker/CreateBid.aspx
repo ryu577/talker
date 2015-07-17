@@ -7,9 +7,12 @@
             <asp:Label ID="Label2" runat="server" Text="At how much do you want to sell?"></asp:Label>
                     
             <asp:TextBox ID="TextBox1" runat="server" Height="17px"></asp:TextBox>
-                <asp:Button ID="Button1" runat="server" Text="Advertize" OnClick="Advertize_Click" />
+                <br />
                 <asp:Label ID="Label1" runat="server" Text="What do you want to talk about?"></asp:Label>
                 <asp:DropDownList ID="CategoriesDropDown" runat="server"></asp:DropDownList>
+                <br />
+                <br />
+                <asp:Button ID="Button1" runat="server" Text="Advertize" OnClick="Advertize_Click" />
         </section>
     
 </asp:Content>
