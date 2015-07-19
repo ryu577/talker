@@ -37,7 +37,8 @@ namespace talker
                 AvailableEndTime = EndTime,
                 DesiredBidPrice = Convert.ToDouble(TextBox1.Text),
                 Status = true,
-                Category = _db.Categories.SingleOrDefault(c => c.CategoryName == CategoryName)//fix - What if calendar entries are empty
+                Category = _db.Categories.SingleOrDefault(c => c.CategoryName == CategoryName),//fix - What if calendar entries are empty
+                AppUser = _db.Users.Single(u => u.Id == LoggedInUser)
             };
             _db.LiveBids.Add(BidToPlace);
             _db.SaveChanges();

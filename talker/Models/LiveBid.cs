@@ -12,8 +12,6 @@ namespace talker.Models
         [Key]
         public int BidID { get; set; }
 
-        public string ProvidingUserName { get; set; }
-
         public DateTime AvailableStartTime { get; set; }
 
         public DateTime AvailableEndTime { get; set; }
@@ -22,10 +20,12 @@ namespace talker.Models
 
         public bool Status { get; set; } //True means the bid is live. False means it should have been transferred to the talks DB.
 
-        public User AppUser { get; set; }
+        public string ProvidingUserName { get; set; }
+
+        public virtual User AppUser { get; set; }
 
         public int? CategoryID { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

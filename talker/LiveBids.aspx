@@ -47,6 +47,10 @@
                                         <b>Price: </b><%#:String.Format("{0:c}", Item.DesiredBidPrice)%>
                                     </span>
                                     <br />
+                                    <span>
+                                        <b>Name: </b><%#:CheckNullUser(Item.AppUser) %>
+                                     </span>
+                                    <br />
                                 </td>
                             </tr>
                             <tr>

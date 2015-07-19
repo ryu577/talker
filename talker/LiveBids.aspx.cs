@@ -30,5 +30,10 @@ namespace talker
             }
             return query;
         }
+        public string CheckNullUser(User bidUser) {
+            if (bidUser == null) return "";
+            else return bidUser.FName;
+        
+        }
     }
 }
