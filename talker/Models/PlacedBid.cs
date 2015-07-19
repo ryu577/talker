@@ -14,6 +14,7 @@ namespace talker.Models
         public string ProvidingMemberId { get; set; }
         public int BidId { get; set; }
         public DateTime BidTime { get; set; }
+        public double BiddedPrice { get; set; }
         public virtual LiveBid AssociatedBid { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace talker.Models
 {
     public class Discussion
     {
-        [ScaffoldColumn(false)]
+        [Key]
         public int DiscussionID { get; set; }
 
         public string ProvidingUserName { get; set; }
@@ -21,9 +21,9 @@ namespace talker.Models
 
         public double TransactionAmount { get; set; }
 
-        public string Status { get; set; }
+        public bool Status { get; set; }
 
-        public int Rating { get; set; }
+        public int? Rating { get; set; }
 
         //public virtual ApplicationUser AppUser { get; set; }
     }

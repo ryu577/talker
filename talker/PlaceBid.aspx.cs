@@ -43,9 +43,22 @@ namespace talker
                 ReceivingMemberId = HttpContext.Current.User.Identity.Name,
                 ProvidingMemberId = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId).ProvidingUserName,
                 BidId = OriginatingBidId,
-                BidTime = DateTime.Now
+                BidTime = DateTime.Now,
+                AssociatedBid = _db.LiveBids.SingleOrDefault(lb => lb.BidID == OriginatingBidId)
             };
-            _db.PlacedBids.Add(placedBid);
+            Discussion newDiscussion = new Discussion
+            {
+                ProvidingUserName = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId).ProvidingUserName,
+                ReceivingUserName = HttpContext.Current.User.Identity.Name,
+                DiscussionStartTime = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId).AvailableStartTime,
+                DiscussionEndTime = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId).AvailableEndTime,
+                TransactionAmount = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId).DesiredBidPrice,
+                Status = true
+            };
+            LiveBid soldBid = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId);
+            _db.LiveBids.Remove(soldBid);
+            //_db.PlacedBids.Add(placedBid);
+            //_db.LiveBids.SingleOrDefault(lb => lb.BidID == OriginatingBidId).PlacedBids.Add(placedBid);
             _db.SaveChanges();
             Response.Redirect("LiveBids.aspx");
         }

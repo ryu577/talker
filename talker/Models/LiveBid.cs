@@ -27,5 +27,7 @@ namespace talker.Models
         public int? CategoryID { get; set; }
 
         public virtual Category Category { get; set; }
+
+        public virtual ICollection<PlacedBid> PlacedBids { get; set; }
     }
 }
