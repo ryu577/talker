@@ -27,14 +27,25 @@ namespace talker
         protected void Advertize_Click(object sender, EventArgs e)
         {
             string LoggedInUser = HttpContext.Current.User.Identity.Name;
-            DateTime StartTime = Calendar1.SelectedDate;
-            DateTime EndTime = Calendar2.SelectedDate;
+            DateTime StartDate = Calendar1.SelectedDate;
+            
+            string StartTimeTxt = txtStartTime.Text;
+            DateTime StartTime = DateTime.ParseExact(StartTimeTxt, "hh:mm tt", System.Globalization.CultureInfo.CurrentCulture);
+            StartDate = StartDate.AddHours(StartTime.Hour);
+            StartDate = StartDate.AddMinutes(StartTime.Minute);
+
+            string EndTimeTxt = txtEndTime.Text;
+            DateTime EndTime = DateTime.ParseExact(EndTimeTxt, "hh:mm tt", System.Globalization.CultureInfo.CurrentCulture);
+            DateTime EndDate = Calendar2.SelectedDate;
+            EndDate = EndDate.AddHours(EndTime.Hour);
+            EndDate = EndDate.AddMinutes(EndTime.Minute);
+
             string CategoryName = CategoriesDropDown.SelectedValue;
             DataContext _db = new DataContext();
             LiveBid BidToPlace = new LiveBid {
                 ProvidingUserName = LoggedInUser,
-                AvailableStartTime = StartTime,
-                AvailableEndTime = EndTime,
+                AvailableStartTime = StartDate,
+                AvailableEndTime = EndDate,
                 DesiredBidPrice = Convert.ToDouble(TextBox1.Text),
                 Status = true,
                 Category = _db.Categories.SingleOrDefault(c => c.CategoryName == CategoryName),//fix - What if calendar entries are empty
@@ -49,5 +60,11 @@ namespace talker
             IQueryable<Category> query = _db.Categories;
             return query;
         }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
