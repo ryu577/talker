@@ -57,6 +57,7 @@ namespace talker
             };
             LiveBid soldBid = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId);
             _db.LiveBids.Remove(soldBid);
+            _db.Discussions.Add(newDiscussion);
             //_db.PlacedBids.Add(placedBid);
             //_db.LiveBids.SingleOrDefault(lb => lb.BidID == OriginatingBidId).PlacedBids.Add(placedBid);
             _db.SaveChanges();

@@ -83,6 +83,9 @@ namespace talker
         {
             Context.GetOwinContext().Authentication.SignOut();
         }
+        protected string GetLoggedInUser() {
+            return HttpContext.Current.User.Identity.Name;
+        }
     }
 
 }

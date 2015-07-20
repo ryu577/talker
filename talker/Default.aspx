@@ -8,4 +8,5 @@
         <asp:Button ID="Bid_Click" runat="server" OnClick="CreateBid_Click" Text="Sell My Time" />
     </p>
     
+    
 </asp:Content>
