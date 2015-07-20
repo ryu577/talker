@@ -5,11 +5,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
        
     <section>
-        
-                <br />
-                <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
-                <br />
-            
+                <div style="width:50%; margin: 0 auto;">
+                    <br />
+                
+                        <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
+                    
+                    <br />
+                </div>
                 <asp:TextBox ID="txtStartTime" runat="server" Text='<%# Bind("StartTime", "{0:t}") %>'
                                         Width="60px"></asp:TextBox>
 
@@ -25,11 +27,11 @@
                                         InvalidValueMessage="Time is invalid" Display="Dynamic" EmptyValueBlurredText="Time is required "
                                         InvalidValueBlurredMessage="Invalid Time" ValidationGroup="MKE" />    
 
-
-                <br />
-                <asp:Calendar ID="Calendar2" runat="server"></asp:Calendar>
-                <br />
-                
+                <div style="width:50%; margin: 0 auto;">
+                    <br />
+                        <asp:Calendar ID="Calendar2" runat="server"></asp:Calendar>
+                    <br />
+                </div>
                 <asp:TextBox ID="txtEndTime" runat="server" Text='<%# Bind("StartTime", "{0:t}") %>'
                                         Width="60px"></asp:TextBox>
 
