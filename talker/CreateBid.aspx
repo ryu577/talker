@@ -50,7 +50,9 @@
                 <asp:TextBox ID="TextBox1" runat="server" Height="17px"></asp:TextBox>
                 <br />
                 <asp:Label ID="Label1" runat="server" Text="What do you want to talk about?"></asp:Label>
-                <asp:DropDownList ID="CategoriesDropDown" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="CategoriesDropDown" runat="server" OnSelectedIndexChanged="CategoriesDropDown_SelectedIndexChanged" AutoPostBack="TRUE">
+
+                </asp:DropDownList>
                 <br />
                 <br />
                 <asp:Button ID="Button1" runat="server" Text="Advertize" OnClick="Advertize_Click" />

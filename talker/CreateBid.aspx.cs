@@ -12,16 +12,20 @@ namespace talker
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<ListItem> categories = new List<ListItem>();
-            var _db = new talker.Models.DataContext();
-            IQueryable<Category> query = _db.Categories;
-            List<Category> dd_categories = (from records in _db.Categories
-                                         select records).ToList();
-            foreach (Category cat in dd_categories){
-                categories.Add(new ListItem(cat.CategoryName));
+            if (!IsPostBack)
+            {
+                List<ListItem> categories = new List<ListItem>();
+                var _db = new talker.Models.DataContext();
+                IQueryable<Category> query = _db.Categories;
+                List<Category> dd_categories = (from records in _db.Categories
+                                                select records).ToList();
+                foreach (Category cat in dd_categories)
+                {
+                    categories.Add(new ListItem(cat.CategoryName));
+                }
+                CategoriesDropDown.DataSource = categories;
+                CategoriesDropDown.DataBind();
             }
-            CategoriesDropDown.DataSource = categories;
-            CategoriesDropDown.DataBind();
         }
 
         protected void Advertize_Click(object sender, EventArgs e)
@@ -40,7 +44,8 @@ namespace talker
             EndDate = EndDate.AddHours(EndTime.Hour);
             EndDate = EndDate.AddMinutes(EndTime.Minute);
 
-            string CategoryName = CategoriesDropDown.SelectedValue;
+            string CategoryName = CategoriesDropDown.SelectedItem.Text;
+            int CategoryId = CategoriesDropDown.SelectedIndex;
             DataContext _db = new DataContext();
             LiveBid BidToPlace = new LiveBid {
                 ProvidingUserName = LoggedInUser,
@@ -48,6 +53,7 @@ namespace talker
                 AvailableEndTime = EndDate,
                 DesiredBidPrice = Convert.ToDouble(TextBox1.Text),
                 Status = true,
+                CategoryID = _db.Categories.SingleOrDefault(c => c.CategoryName == CategoryName).CategoryID,
                 Category = _db.Categories.SingleOrDefault(c => c.CategoryName == CategoryName),//fix - What if calendar entries are empty
                 AppUser = _db.Users.Single(u => u.Id == LoggedInUser)
             };
@@ -64,6 +70,14 @@ namespace talker
         protected void btnSave_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void CategoriesDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int i = CategoriesDropDown.SelectedIndex;
+            string j = CategoriesDropDown.SelectedItem.Text;
+            string k = CategoriesDropDown.SelectedValue;
+            string dummy = "dummy";
         }
 
     }
