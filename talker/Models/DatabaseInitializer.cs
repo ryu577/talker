@@ -27,7 +27,8 @@ namespace talker.Models
                     DiscussionEndTime = DateTime.Parse("2/21/2009 10:38 PM"),
                     TransactionAmount = 0.1,
                     Status = true,
-                    Rating = 0
+                    Rating = 0,
+                    DateCreated = DateTime.Parse("2/21/2014 10:38 PM")
                 },
                 new Discussion
                 {
@@ -38,7 +39,8 @@ namespace talker.Models
                     DiscussionEndTime = DateTime.Parse("2/21/2009 10:38 PM"),
                     TransactionAmount = 0.1,
                     Status = true,
-                    Rating = 0
+                    Rating = 0,
+                    DateCreated = DateTime.Parse("2/21/2014 10:38 PM")
                 },
                 new Discussion
                 {
@@ -49,7 +51,8 @@ namespace talker.Models
                     DiscussionEndTime = DateTime.Parse("2/21/2009 10:38 PM"),
                     TransactionAmount = 0.1,
                     Status = true,
-                    Rating = 0
+                    Rating = 0,
+                    DateCreated = DateTime.Parse("2/21/2014 10:38 PM")
                 },
                 new Discussion
                 {
@@ -60,7 +63,8 @@ namespace talker.Models
                     DiscussionEndTime = DateTime.Parse("2/21/2009 10:38 PM"),
                     TransactionAmount = 0.1,
                     Status = true,
-                    Rating = 0
+                    Rating = 0,
+                    DateCreated = DateTime.Parse("2/21/2014 10:38 PM")
                 },
                 new Discussion
                 {
@@ -71,7 +75,8 @@ namespace talker.Models
                     DiscussionEndTime = DateTime.Parse("2/21/2009 10:38 PM"),
                     TransactionAmount = 0.1,
                     Status = true,
-                    Rating = 0
+                    Rating = 0,
+                    DateCreated = DateTime.Parse("2/21/2014 10:38 PM")
                 },
             };
 

@@ -53,7 +53,8 @@ namespace talker
                 DiscussionStartTime = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId).AvailableStartTime,
                 DiscussionEndTime = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId).AvailableEndTime,
                 TransactionAmount = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId).DesiredBidPrice,
-                Status = true
+                Status = true,
+                DateCreated = DateTime.Now
             };
             LiveBid soldBid = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId);
             _db.LiveBids.Remove(soldBid);

@@ -19,6 +19,8 @@ namespace talker.Models
 
         public DateTime DiscussionEndTime { get; set; }
 
+        public DateTime DateCreated { get; set; }
+
         public double TransactionAmount { get; set; }
 
         public bool Status { get; set; }
