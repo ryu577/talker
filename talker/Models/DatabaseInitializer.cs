@@ -113,7 +113,8 @@ namespace talker.Models
                     AvailableStartTime = DateTime.Parse("2/21/2009 10:35 PM"),
                     AvailableEndTime = DateTime.Parse("2/21/2009 10:38 PM"),
                     DesiredBidPrice = 1.1,
-                    Status = true
+                    Status = true,
+                    CategoryID = 3
                 },
             };
 

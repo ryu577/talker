@@ -22,10 +22,10 @@
         <strong>
             <asp:Label ID="LabelTotalText" runat="server" Text="Order Total: "></asp:Label>
             <asp:Label ID="lblTotal" runat="server" EnableViewState="false"></asp:Label>
-        </strong> 
+        </strong>
     </div>
     <br />
-    <table> 
+    <table>
     <tr>
       <td>
         <asp:Button ID="UpdateBtn" runat="server" Text="Update" OnClick="UpdateBtn_Click" />

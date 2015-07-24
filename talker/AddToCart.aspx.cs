@@ -13,7 +13,7 @@ namespace talker
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string rawId = Request.QueryString["DiscussionID"];
+            string rawId = Request.QueryString["discussionId"];
             int productId;
             if (!String.IsNullOrEmpty(rawId) && int.TryParse(rawId, out productId))
             {

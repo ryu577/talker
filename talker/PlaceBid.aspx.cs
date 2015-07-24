@@ -38,14 +38,14 @@ namespace talker
             DataContext _db = new DataContext();
             string RawId = Request.QueryString["LiveBidId"];
             int OriginatingBidId = Convert.ToInt32(RawId);
-            PlacedBid placedBid = new PlacedBid
+            /*PlacedBid placedBid = new PlacedBid
             {
                 ReceivingMemberId = HttpContext.Current.User.Identity.Name,
                 ProvidingMemberId = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId).ProvidingUserName,
                 BidId = OriginatingBidId,
                 BidTime = DateTime.Now,
                 AssociatedBid = _db.LiveBids.SingleOrDefault(lb => lb.BidID == OriginatingBidId)
-            };
+            };*/
             Discussion newDiscussion = new Discussion
             {
                 ProvidingUserName = _db.LiveBids.SingleOrDefault(p => p.BidID == OriginatingBidId).ProvidingUserName,
