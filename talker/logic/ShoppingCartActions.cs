@@ -78,7 +78,7 @@ namespace talker.logic
                 c => c.CartId == ShoppingCartId).ToList();
         }
 
-        /*public decimal GetTotal()
+        public decimal GetTotal()
         {
             ShoppingCartId = GetCartId();
             // Multiply product price by quantity of that product to get        
@@ -87,10 +87,9 @@ namespace talker.logic
             decimal? total = decimal.Zero;
             total = (decimal?)(from cartItems in _db.ShoppingCartItems
                                where cartItems.CartId == ShoppingCartId
-                               select (int?)cartItems.Quantity *
-                               cartItems.Product.UnitPrice).Sum();
+                               select cartItems.Discussion.TransactionAmount).Sum();
             return total ?? decimal.Zero;
-        }*/
+        }
 
         public ShoppingCartActions GetCart(HttpContext context)
         {

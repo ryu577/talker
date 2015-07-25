@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using talker.Models;
+using talker.logic;
 
 namespace talker.Account
 {
@@ -26,6 +27,10 @@ namespace talker.Account
                 AddToUser(Email.Text);
                 signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
                 IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                using(ShoppingCartActions userShoppingCart = new ShoppingCartActions()){
+                    String cartId = userShoppingCart.GetCartId();
+                    userShoppingCart.MigrateCart(cartId, user.Id);
+                }
             }
             else 
             {

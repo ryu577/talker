@@ -432,6 +432,7 @@
       <DependentUpon>LiveBids.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="logic\ExceptionUtility.cs" />
     <Compile Include="logic\PayPalFunctions.cs" />
     <Compile Include="logic\ShoppingCartActions.cs" />
     <Compile Include="Models\CartItem.cs" />

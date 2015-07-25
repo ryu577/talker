@@ -51,7 +51,62 @@ public class NVPAPICaller
         APISignature = Signature;
     }
 
-    
+    public bool ShortcutExpressCheckout(string amt, ref string token, ref string retMsg)
+    {
+        if (bSandbox)
+        {
+            pEndPointURL = pEndPointURL_SB;
+            host = host_SB;
+        }
+
+        string returnURL = "http://localhost:63470/Checkout/CheckoutReview.aspx";
+        string cancelURL = "http://localhost:63470/Checkout/CheckoutCancel.aspx";
+
+        NVPCodec encoder = new NVPCodec();
+        encoder["METHOD"] = "SetExpressCheckout";
+        encoder["RETURNURL"] = returnURL;
+        encoder["CANCELURL"] = cancelURL;
+        encoder["BRANDNAME"] = "Wingtip Toys Sample Application";
+        encoder["PAYMENTREQUEST_0_AMT"] = amt;
+        encoder["PAYMENTREQUEST_0_ITEMAMT"] = amt;
+        encoder["PAYMENTREQUEST_0_PAYMENTACTION"] = "Sale";
+        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = "USD";
+
+        // Get the Shopping Cart Products
+        using (talker.logic.ShoppingCartActions myCartOrders = new talker.logic.ShoppingCartActions())
+        {
+            List<CartItem> myOrderList = myCartOrders.GetCartItems();
+
+            for (int i = 0; i < myOrderList.Count; i++)
+            {
+                encoder["L_PAYMENTREQUEST_0_NAME" + i] = myOrderList[i].Discussion.ProvidingUserName.ToString();
+                encoder["L_PAYMENTREQUEST_0_AMT" + i] = myOrderList[i].Discussion.TransactionAmount.ToString();
+                encoder["L_PAYMENTREQUEST_0_QTY" + i] = "1";
+            }
+        }
+
+        string pStrrequestforNvp = encoder.Encode();
+        string pStresponsenvp = HttpCall(pStrrequestforNvp);
+
+        NVPCodec decoder = new NVPCodec();
+        decoder.Decode(pStresponsenvp);
+
+        string strAck = decoder["ACK"].ToLower();
+        if (strAck != null && (strAck == "success" || strAck == "successwithwarning"))
+        {
+            token = decoder["TOKEN"];
+            string ECURL = "https://" + host + "/cgi-bin/webscr?cmd=_express-checkout" + "&token=" + token;
+            retMsg = ECURL;
+            return true;
+        }
+        else
+        {
+            retMsg = "ErrorCode=" + decoder["L_ERRORCODE0"] + "&" +
+                "Desc=" + decoder["L_SHORTMESSAGE0"] + "&" +
+                "Desc2=" + decoder["L_LONGMESSAGE0"];
+            return false;
+        }
+    }
 
     public bool GetCheckoutDetails(string token, ref string PayerID, ref NVPCodec decoder, ref string retMsg)
     {
@@ -65,8 +120,8 @@ public class NVPAPICaller
         encoder["TOKEN"] = token;
 
         string pStrrequestforNvp = encoder.Encode();
-        //string pStresponsenvp = HttpCall(pStrrequestforNvp);
-        string pStresponsenvp = "dummy";
+        string pStresponsenvp = HttpCall(pStrrequestforNvp);
+
         decoder = new NVPCodec();
         decoder.Decode(pStresponsenvp);
 
@@ -102,8 +157,8 @@ public class NVPAPICaller
         encoder["PAYMENTREQUEST_0_PAYMENTACTION"] = "Sale";
 
         string pStrrequestforNvp = encoder.Encode();
-        //string pStresponsenvp = HttpCall(pStrrequestforNvp);
-        string pStresponsenvp = "";
+        string pStresponsenvp = HttpCall(pStrrequestforNvp);
+
         decoder = new NVPCodec();
         decoder.Decode(pStresponsenvp);
 
@@ -121,7 +176,41 @@ public class NVPAPICaller
             return false;
         }
     }
-    
+
+    public string HttpCall(string NvpRequest)
+    {
+        string url = pEndPointURL;
+
+        string strPost = NvpRequest + "&" + buildCredentialsNVPString();
+        strPost = strPost + "&BUTTONSOURCE=" + HttpUtility.UrlEncode(BNCode);
+
+        HttpWebRequest objRequest = (HttpWebRequest)WebRequest.Create(url);
+        objRequest.Timeout = Timeout;
+        objRequest.Method = "POST";
+        objRequest.ContentLength = strPost.Length;
+
+        try
+        {
+            using (StreamWriter myWriter = new StreamWriter(objRequest.GetRequestStream()))
+            {
+                myWriter.Write(strPost);
+            }
+        }
+        catch (Exception e)
+        {
+            // Log the exception.
+            talker.logic.ExceptionUtility.LogException(e, "HttpCall in PayPalFunction.cs");
+        }
+
+        //Retrieve the Response returned from the NVP API call to PayPal.
+        HttpWebResponse objResponse = (HttpWebResponse)objRequest.GetResponse();
+        string result;
+        using (StreamReader sr = new StreamReader(objResponse.GetResponseStream()))
+        {
+            result = sr.ReadToEnd();
+        }
+        return result;
+    }
 
     private string buildCredentialsNVPString()
     {

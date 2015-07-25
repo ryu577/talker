@@ -46,14 +46,19 @@ namespace talker.Account
                     case SignInStatus.RequiresVerification:
                         Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
                                                         Request.QueryString["ReturnUrl"],
-                                                        RememberMe.Checked),
-                                          true);
+                                                        RememberMe.Checked), true);
                         break;
                     case SignInStatus.Failure:
                     default:
                         FailureText.Text = "Invalid login attempt";
                         ErrorMessage.Visible = true;
                         break;
+                }
+                ApplicationUser user = manager.Find(Email.Text, Password.Text);
+                if (user != null) {
+                    talker.logic.ShoppingCartActions userShoppingCart = new talker.logic.ShoppingCartActions();
+                    String cartId = userShoppingCart.GetCartId();
+                    userShoppingCart.MigrateCart(cartId, Email.Text);
                 }
             }
         }
